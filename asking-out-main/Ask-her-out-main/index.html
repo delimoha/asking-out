@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delimoha</title>
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styles for pop-up */
+        .popup {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; /* Ensure pop-up is on top of other content */
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        /* Button style */
+        .button {
+            background-color: #4CAF50; /* Green background */
+            border: none;
+            color: white; /* White text */
+            padding: 15px 32px; /* Padding */
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer; /* Pointer cursor */
+            border-radius: 8px; /* Rounded corners */
+        }
+    </style>
+</head>
+<body>
+   
+    <div class="container mx-auto">
+       
+        <h1 class="text-2xl" id="init">Hey 👋, Can I Ask You Something?</h1>
+        <button onclick="startQuestions()" id="que">Sure, Ask Away!</button>
+
+        <div id="questions" style="display: none;">
+            <h1 class="text-2xl mt-8">Question 1:</h1>
+            <p>Do you think I can bag you ?</p>
+            <button onclick="answerYes()">Yes</button>
+            <button onclick="answerNo()" class="no">No</button>
+        </div>
+
+        <div id="message" style="display: none;">
+            <p id="messageText"></p>
+        </div>
+    </div>
+
+    <canvas id="confetti-canvas">
+    </canvas>
+
+    <footer class="text-center mt-8">
+        <button class="button" onclick="openInstagram()">Why dont you DM me 👏 _deliali__</button>
+    </footer>
+
+    <div id="instagram-popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p>Oh you were interested? Then</p>
+            <button class="button" onclick="redirectToInstagram()">DM me</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/confetti-js"></script>
+    <script>
+        function startQuestions() {
+            document.getElementById("questions").style.display = "block";
+        }
+
+        function answerYes() {
+            document.getElementById("questions").style.display = "none";
+            document.getElementById("que").style.display = "none";
+            document.getElementById("init").innerText = "SAY WLHI 🎉🎉🎉";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("messageText").innerText = "I'm not surprised but thanks though ?";
+            showConfetti();
+        }
+
+        function answerNo() {
+            document.getElementById("questions").style.display = "none";
+            document.getElementById("que").style.display = "none";
+            document.getElementById("init").innerText = "OHHHH 😮‍💨😮‍💨";
+            document.getElementById("message").style.display = "block";
+            document.getElementById("messageText").innerText = "No worries, you werent that cute anyways ?";
+            showConfetti();
+        }
+
+        // Function to show confetti
+        function showConfetti() {
+            const confettiSettings = {
+                target: 'confetti-canvas',
+                respawn: true,
+                colors: ['#ff0000', '#00ff00', '#0000ff'], 
+            };
+
+            const confetti = new ConfettiGenerator(confettiSettings);
+            confetti.render();
+            setTimeout(() => {
+                confetti.clear();
+            }, 5000);
+        }
+
+        function openInstagram() {
+            document.getElementById("instagram-popup").style.display = "block";
+        }
+
+        function redirectToInstagram() {
+            window.location.href = "https://www.instagram.com/_deliali__/direct/?followup=dm&message=Hi";
+        }
+
+        function closePopup() {
+            document.getElementById("instagram-popup").style.display = "none";
+        }
+    </script>
+</body>
+</html>
